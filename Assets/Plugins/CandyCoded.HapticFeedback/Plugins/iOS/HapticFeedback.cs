@@ -24,7 +24,7 @@ namespace CandyCoded.HapticFeedback.iOS
     #endif
         }
     
-        void Dispose()
+        public static void Dispose()
         {
     #if UNITY_IOS && !UNITY_EDITOR
             CleanupHapticFeedback();
