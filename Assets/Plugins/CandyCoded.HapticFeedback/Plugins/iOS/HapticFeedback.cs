@@ -8,8 +8,28 @@ namespace CandyCoded.HapticFeedback.iOS
     public static class HapticFeedback
     {
 
+        // [DllImport("__Internal")]
+        // public static extern void PerformHapticFeedback(string style = "medium");
+
         [DllImport("__Internal")]
-        public static extern void PerformHapticFeedback(string style = "medium");
+        private static extern void PerformHapticFeedback(string style = "light");
+    
+        [DllImport("__Internal")]
+        private static extern void CleanupHapticFeedback();
+    
+        public static void Generate(string style)
+        {
+    #if UNITY_IOS && !UNITY_EDITOR
+            PerformHapticFeedback(style);
+    #endif
+        }
+    
+        void Dispose()
+        {
+    #if UNITY_IOS && !UNITY_EDITOR
+            CleanupHapticFeedback();
+    #endif
+        }
 
     }
 
